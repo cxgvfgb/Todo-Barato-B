@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="TodobaratoApplication" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.todobarato.pcl.todobarato.TodobaratoApplication" />
+    <module name="todobarato.main" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <envs>
+      <env name="DB_HOST" value="localhost" />
+      <env name="DB_PORT" value="3307" />
+      <env name="DB_NAME" value="todobarato" />
+      <env name="DB_USER" value="root" />
+      <env name="DB_PASSWORD" value="root" />
+      <env name="JPA_DDL_AUTO" value="update" />
+    </envs>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

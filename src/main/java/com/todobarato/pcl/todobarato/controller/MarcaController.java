@@ -2,7 +2,6 @@ package com.todobarato.pcl.todobarato.controller;
 
 import com.todobarato.pcl.todobarato.dto.request.MarcaRequestDTO;
 import com.todobarato.pcl.todobarato.dto.response.MarcaResponseDTO;
-import com.todobarato.pcl.todobarato.model.entity.Marca;
 import com.todobarato.pcl.todobarato.service.MarcaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -10,7 +9,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,6 +33,16 @@ public class MarcaController {
     @GetMapping
     public ResponseEntity<List<MarcaResponseDTO>> listarTodos(){
         return ResponseEntity.ok(marcaService.listarTodos());
+    }
+
+    @Operation(summary = "Buscar marca por ID", description = "Obtiene una marca por su identificador")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Marca encontrada"),
+            @ApiResponse(responseCode = "404", description = "No existe una marca con ese id")
+    })
+    @GetMapping("/{idmarca}")
+    public ResponseEntity<MarcaResponseDTO> buscarPorId(@PathVariable Integer idmarca){
+        return ResponseEntity.ok(marcaService.buscarPorId(idmarca));
     }
 
     @Operation(summary = "Crear marca", description = "Crea una nueva marca validando campos y evitando duplicados")
@@ -68,7 +76,6 @@ public class MarcaController {
     })
     @DeleteMapping("/{idmarca}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer idmarca){
-        MarcaResponseDTO marcaEliminar = marcaService.buscarPorId(idmarca);
         marcaService.eliminar(idmarca);
         return ResponseEntity.noContent().build();
     }
